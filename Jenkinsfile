@@ -3,7 +3,9 @@ node {
         checkout scm
     }
     stage('Build'){
-        sh "go version"
+        withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]){
+                sh "go version"
+         }
     }
     stage('Test'){
         sh "go test -v"

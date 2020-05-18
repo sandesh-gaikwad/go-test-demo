@@ -3,7 +3,7 @@ node {
         checkout scm
     }
     stage('Build'){
-        sh "go build ."
+        sh "go version"
     }
     stage('Test'){
         sh "go test -v"

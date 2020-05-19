@@ -1,4 +1,4 @@
-node {
+node('master') {
     
     def root = tool name: 'go-1.14.3', type:'go'
     

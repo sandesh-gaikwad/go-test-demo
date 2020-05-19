@@ -1,4 +1,4 @@
-node('master') {
+node('agent2') {
     
     def root = tool name: 'go-1.14.3', type:'go'
     

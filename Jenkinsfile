@@ -23,7 +23,7 @@ pipeline {
                  body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
                  //recipientProviders: [developers(), requestor()],
                  to: "sandesh.gaikwad@afourtech.com", 
-                     subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME} - ${env.BUILD_NUMBER}"
+                     subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}: ${env.BUILD_NUMBER}"
             }
     }
 }

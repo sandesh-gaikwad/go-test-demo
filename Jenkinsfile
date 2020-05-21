@@ -6,21 +6,27 @@ pipeline {
     stages {
         stage ('checkout code') {
             steps {
-                checkout scm
+                timestamps {
+                    checkout scm
+                }
             }
         }
         stage('Test') {
             steps {
+                    timestamps {
                         withEnv(["PATH+EXTRA=${HOME}/go/bin"]){
-                        sh 'go test -v'
+                            sh 'go test -v'
+                        }
                     }
                 }
             }
 
         stage('Test Coverage') {
             steps {
+                    timestamps {
                         withEnv(["PATH+EXTRA=${HOME}/go/bin"]){
-                        sh 'go test -coverprofile cover_repport.out'
+                            sh 'go test -coverprofile cover_repport.out'
+                        }
                     }
                 }
             }

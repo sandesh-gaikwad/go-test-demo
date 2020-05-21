@@ -1,5 +1,8 @@
 pipeline {
     agent {label 'Node-1'}
+    tools {
+         go 'go-1.14.3'
+     }
     stages {
         stage ('checkout code') {
             steps {

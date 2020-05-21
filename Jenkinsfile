@@ -1,38 +1,22 @@
-node('master') {
-    
-    def root = tool name: 'go-1.14.3', type:'go'
-    
-    stage('Checkout Code') {
-         checkout scm
-    }
-    
-    stage('Build'){
-        withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
-                sh "go version"
-         }
-    }
-    stage('Test'){
-       withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
-                sh "go test -v"
-         }
-    }
-}
-node('agent2') {
-    
-    def root = tool name: 'go-1.14.3', type:'go'
-    
-    stage('Checkout Code') {
-         checkout scm
-    }
-    
-    stage('Build'){
-        withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
-                sh "go version"
-         }
-    }
-    stage('Test'){
-       withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
-                sh "go test -v"
-         }
+pipeline {
+    agent {label 'Node-1'}
+    stages {
+        stage ('checkout code') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Test') {
+            steps {
+                    withEnv(["PATH+EXTRA=${HOME}/go/bin"]){
+                    sh 'go test -v'
+                    }
+                }
+            }
+        }
+    post {
+            always {
+                 emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+            }
     }
 }

@@ -28,8 +28,8 @@ pipeline {
     post {
             always {
                  emailext attachLog: true,
-                 body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
-                 attachmentPattern: "**/*.out"
+                 body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n",
+                 attachmentPattern: "**/*.out",
                  to: "sandesh.gaikwad@afourtech.com", 
                  subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME} - ${env.BUILD_NUMBER}"
             }

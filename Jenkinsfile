@@ -11,8 +11,16 @@ pipeline {
         }
         stage('Test') {
             steps {
-                    withEnv(["PATH+EXTRA=${HOME}/go/bin"]){
-                    sh 'go test -v'
+                        withEnv(["PATH+EXTRA=${HOME}/go/bin"]){
+                        sh 'go test -v'
+                    }
+                }
+            }
+
+        stage('Test Coverage') {
+            steps {
+                        withEnv(["PATH+EXTRA=${HOME}/go/bin"]){
+                        sh 'go test -coverprofile cover_repport.out'
                     }
                 }
             }
